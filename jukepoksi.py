@@ -1,25 +1,35 @@
 #!/usr/bin/env python
-import mad, alsaaudio, sys, tagpy
+import sys
+from audiofile import audiofile
+from output import AlsaOutput
 
-audiofile = sys.argv[1]
-filetype = audiofile.rsplit('.', 1)[1]
 
-alsadev = alsaaudio.PCM()
+class Player(object):
+    blocksize = 4
 
-try:
-    tag = tagpy.FileRef(audiofile).tag()
-    print "np: %s - %s" % (tag.artist, tag.title)
-except ValueError:
-    pass
+    def __init__(self, path, output):
+        self.path = path
+        self.afile = audiofile(path)
+        self.output = output
 
-decoder = None
+    def np(self):
+        if self.afile.tag:
+            return "np: %s - %s" % (self.afile.tag.artist, self.afile.tag.title)
 
-if filetype == 'mp3':
-    decoder = mad.MadFile(audiofile)
+    def play(self):
+        while True:
+            data = self.afile.read_block(self.blocksize)
+            self.output.write(data)
 
-if decoder:
-    while 1:
-        buf = decoder.read(128)
-        if buf == None:
-            break
-        alsadev.write(buf)
+    def pause(self):
+        pass
+
+    def stop(self):
+        pass
+
+if __name__ == '__main__':
+    afile_path = sys.argv[1]
+    output = AlsaOutput()
+    player = Player(afile_path, output)
+    print player.np()
+    player.play()
