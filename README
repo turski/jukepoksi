@@ -1,0 +1,9 @@
+Kokeellinen pythonilla toteutettu musiikkisoitin.
+
+Tiedostotuki:
+  * aac
+  * flac
+  * mp3
+
+Käyttö:
+  ./jukebox.py TIEDOSTO
