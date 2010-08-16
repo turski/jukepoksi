@@ -1,9 +1,28 @@
 Kokeellinen pythonilla toteutettu musiikkisoitin.
 
+Riippuvuudet:
+  * python
+  * mongodb
+  * pymongo
+  * pymad
+  * flac
+  * faad
+
 Tiedostotuki:
   * aac
   * flac
   * mp3
 
 Käyttö:
-  ./jukebox.py TIEDOSTO
+  * käynnistä demoni (joka ei vielä oikeasti osaa demonisoitua, se on vielä niin
+    nuori): ./daemon.py
+
+  * härki sitä testiclientillä:
+    ./testclient.py 'U|'      # päivitä tietokanta
+    ./testclient.py 'P|123'   # soita kappale 123
+
+  * tietoa kappaleista et vielä tässä vaiheessa saa ulos kuin tutkimalla
+    tietokantaa manuaalisesti:
+    mongo
+    > use jukepoksi
+    > db.tracks.find( { artist: 'Nightwish' } )
