@@ -2,6 +2,8 @@ Kokeellinen pythonilla toteutettu musiikkisoitin.
 
 Riippuvuudet:
   * python
+  * pyalsaaudio
+  * mutagen
   * mongodb
   * pymongo
   * pymad
@@ -17,7 +19,7 @@ Käyttö:
   * käynnistä demoni (joka ei vielä oikeasti osaa demonisoitua, se on vielä niin
     nuori): ./daemon.py
 
-  * härki sitä testiclientillä:
+  * härki sitä testiclientillä (joka on vielä hyvin askeettinen):
     ./testclient.py 'U|'      # päivitä tietokanta
     ./testclient.py 'P|123'   # soita kappale 123
 
@@ -25,4 +27,4 @@ Käyttö:
     tietokantaa manuaalisesti:
     mongo
     > use jukepoksi
-    > db.tracks.find( { artist: 'Nightwish' } )
+    > db.files.find( { artist: 'Nightwish' } )
