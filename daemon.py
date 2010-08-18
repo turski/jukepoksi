@@ -65,8 +65,8 @@ class Daemon(object):
         for entry in self.collection.db.tracks.find():
             yield entry
 
-    def play(self, id, *args):
-        afile = self.collection.open(int(id))
+    def play(self, f_id, *args):
+        afile = self.collection.open(int(f_id))
         self.player.load(afile)
         self.play_thread = Thread(target=self.player._play)
         self.player.status = 'play'

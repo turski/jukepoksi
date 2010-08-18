@@ -42,12 +42,6 @@ def audiofile(afile_path):
     filecls = filetypes.get(filetype)
     return filecls(afile_path)
 
-def is_supported(filetype):
-    if filetype in ['aac', 'flac', 'mp3']:
-        return True
-    else:
-        return False
-
 
 filetypes = {'aac': AacFile,
             'flac': FlacFile,
